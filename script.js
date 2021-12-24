@@ -40,7 +40,8 @@ function UpdateTable(){
         var nameCell = newRow.insertCell();
         var initiativeCell = newRow.insertCell();
         var endCell = newRow.insertCell();
-        var editCell = newRow.insertCell();
+        var killCell = newRow.insertCell();
+
         // Append a text node to the cell
         var nameText = document.createTextNode(nodes[i].name);
         var initiativeText = document.createTextNode(nodes[i].displayInitiative);
@@ -53,15 +54,13 @@ function UpdateTable(){
         }else{
             endCell.innerHTML += `<button id='btnEndHidden' onclick='EndTurn(${currentId})' button type="button"></button>`;
         }
-        editCell.innerHTML += `<button id='btnEdit' onclick='EditCell(${currentId})' button type="button"></button>`;
-
+        killCell.innerHTML += `<button id='btnKill' onclick='KillCharacter(${currentId})' button type="button"></button>`;
         row = tbodyRef.insertRow();
     }
 }
 
 function RemoveItemsAndEmptyNodes(){
     EmptyNodes()
-    RemoveItems();
     UpdateTable();
     
 }
@@ -84,6 +83,8 @@ function EmptyNodes(){
     nodes = [];
 }
 
-function EditCell(id){
+function KillCharacter(id){
+    nodes = nodes.filter(item => item.id !== id)
 
+    UpdateTable();
 }
