@@ -246,7 +246,20 @@
             <div class="col-6">
                 <div class="card">
                     <div class="card-body">
-                        <h4 class="mb-3" style="vertical-align: 200px; text-align: center; background-color: #7C7C7C; height: 50px; border-radius: 15px; padding: 10px;">Adventurers</h4>
+                        <h4 class="mb-3" style="vertical-align: 200px; text-align: center; background-color: #7C7C7C; height: 50px; border-radius: 15px; padding: 10px;">Adventurers
+                            <button id="reset" type="button" class="btn mb-1" style="float:right; border-radius: 15px; height:35px">
+                                <i class="fas fa-sync-alt" 
+                                    onclick=
+                                    "AddItem('Fivyn', 'fivynInitiative');
+                                    AddItem('Nym', 'nymInitiative');
+                                    AddItem('Frog', 'frogInitiative');
+                                    AddItem('Pepper', 'pepperInitiative');
+                                    AddItem('Haema', 'haemaInitiative');
+                                    AddItem('Myrtle/River', 'myrtleRiverInitiative');"
+                                    >
+                                </i>
+                            </button>
+                        </h4>
                         <div class="row">
                             <table class="table" id="table">
                                 <thead></thead>
