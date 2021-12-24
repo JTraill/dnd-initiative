@@ -2,12 +2,27 @@ var nodes = [];
 var count = 0;
 
 function AddItem(val, init){
+    var name;
+    var initiative;
+
     if(val != null){
         name = val;
-        var initiative = document.getElementById(init).value
+        initiative = document.getElementById(init).value
+        if(initiative == ""){
+            return;
+        }
     }else{
-        var name = document.getElementById('name').value;
-        var initiative = document.getElementById('initiative').value;
+        name = document.getElementById('name').value;
+        initiative = document.getElementById('initiative').value;
+
+        if(name == "" || initiative == ""){
+            return;
+        }
+    }
+    if(nodes!=null){
+        nodes = nodes.filter(obj => {
+            return obj.name != name
+        })
     }
 
     var node = {
@@ -18,9 +33,9 @@ function AddItem(val, init){
         id: count,
         modifier: initiative
     }
-    count++;
 
     nodes.push(node);
+    count++;
     UpdateTable();
 }
 
@@ -67,7 +82,6 @@ function RemoveItemsAndEmptyNodes(){
 }
 
 function EndTurn(id){
-    console.log(id);
     var result = nodes.filter(obj => {
         return obj.id === id
       })[0]
