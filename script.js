@@ -33,15 +33,17 @@ function AddItem(val, init){
         id: count,
         modifier: initiative
     }
-
+    
     nodes.push(node);
     count++;
+
+    UpdateCache();
     UpdateTable();
 }
 
 function UpdateTable(){
     nodes.sort((a, b) => parseFloat(b.modifier) - parseFloat(a.modifier));
-
+    UpdateCache();
     RemoveItems()
 
     for (i = 0; i < nodes.length; i++) {
@@ -77,8 +79,6 @@ function UpdateTable(){
 function RemoveItemsAndEmptyNodes(){
     EmptyNodes();
     RemoveItems();
-    //UpdateTable();
-    
 }
 
 function EndTurn(id){
@@ -92,20 +92,30 @@ function EndTurn(id){
 
 function RemoveItems(){
     $('#table tr:not(:first)').remove();
+    UpdateCache();
 }
 
 function EmptyNodes(){
     nodes = [];
+    UpdateCache();
 }
 
 function KillCharacter(id){
     nodes = nodes.filter(item => item.id !== id)
-
     UpdateTable();
 }
 
-window.onbeforeunload = confirmExit;
-
-function confirmExit() {
-    return "You have attempted to leave this page. Are you sure?";
+function UpdateCache(){
+    localStorage.setItem("nodes", JSON.stringify(nodes));
+    console.log(localStorage['nodes']);
 }
+
+function ParseCache(){
+    nodes = JSON.parse(localStorage.getItem("nodes") || "[]");
+    console.log(nodes);
+}
+
+window.addEventListener("load", function(){
+    ParseCache();
+    UpdateTable();
+});
